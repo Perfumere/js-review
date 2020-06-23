@@ -2,7 +2,7 @@
 function shellSort(arr) {
     let len = arr.length;
     let gap = 0;
-    while (gap < len) {
+    while (gap < len / 3) {
         gap = gap * 3 + 1;
     }
     for (; gap; gap = Math.floor(gap / 3)) {
