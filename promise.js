@@ -41,6 +41,7 @@ function Promise(excutor) {
         reject(e);
     }
 }
+
 Promise.prototype.then = function(onFulfilled, onRejected) {
     onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : value => value;
     onRejected = typeof onRejected === 'function' ? onRejected : reason => { throw reason };

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>plpen</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    .app {
+      width: 800px;
+      margin: 0 auto;
+    }
+
+    svg {
+      margin-left: 100px;
+    }
+  </style>
+</head>
+
+<body>
+  <svg width="0" height="0">
+    <defs>
+      <marker id="m-arrow" viewBox="0 0 20 20" refX="0" refY="10"
+        markerWidth="10" markerHeight="10" orient="auto">
+      <path d="M 0 0 L 20 10 L 0 20 z" />
+    </defs>
+  </svg>
+  <div id="app"></div>
+  <!-- 测试脚本 -->
+  <script type="module">
+    import Pen from "./plpen.js";
+    const addPoint = (x,y) => {
+      const resetO = {
+        r:6,
+        stroke:'#333',
+        'stroke-opcity':'.5',
+        fill:'hsla(110,50%,50%,.4)',
+      }
+      if(Object.prototype.toString.call(x) === '[object Array]'){
+        console.log(x.map(item => ({
+          ...item,
+          ...resetO
+        })))
+        return svg.add('circle',x.map(item => ({
+          ...item,
+          ...resetO
+        })))
+      }
+      return svg.add('circle',{
+        cx:x,
+        cy:y,
+        ...resetO
+      })[0];
+    }
+      const svg = new Pen("svg", {
+        width: 600,
+        height: 300,
+        style:'padding:0;box-sizing:border-box;',
+        transform:'scale(1,-1)',
+        viewBox:'-20 -10 580 280'
+      }).mount("#app");
+      const Curve = new Pen('path',{
+        fill:'none',
+        stroke:'red',
+        'stroke-width':2,
+        'stroke-linecap':'round',
+        'stroke-linejoin':'round',
+        d:'M0,0 100,100 h30 v-99 Z'
+      });
+      addPoint([
+        { cx:10, cy:10 },
+      ]);
+      svg.appendChild(Curve);
+      
+    </script>
+</body>
+
+</html>

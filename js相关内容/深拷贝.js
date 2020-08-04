@@ -19,8 +19,7 @@ const dpClone = (o) => {
         let child, proto;
         const type = checkType(parent);
         if (type === '[object Array]') {
-            // 判断传入的数据是数组类型
-            child = [];
+            // 判断传入的数据是数组类型            child = [];
         } else if (type === '[object RegExp]') {
             // 判断传入的数据是正则类型
             child = new RegExp(parent.source, getRegExp(parent));
